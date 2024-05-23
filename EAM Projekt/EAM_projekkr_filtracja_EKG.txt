@@ -1,0 +1,12 @@
+4. Opis użytych metod analizy
+
+Ponieważ sygnał EKG ze swej natury jest wysoce zaszumiony, do jego analizy konieczne jest użycie filtrów. Stosuje się filtry pasmowoprzepustowe, które przepuszczają sygnał tylko w określonym zakresie częstotliwości. 
+
+Tłumienie częstotliwości wysokich pozwala wygładzić artefakty związane z aktywnością elektryczną mięśni. Mają to szczególne znaczenie przy pomierze EKG podczas wykonywania ćwiczeń angażujących górne partie mięśni (np. pompki), których aktywność wyraźnie zakłócała sygnał. Tłumienie częstotliwości niskich pozwala na likwidację ‘płynięcia’ sygnału związaną z oddychaniem lub ze zmieniającymi się warunkami pomiaru (temperatura, rezystancja skóry).
+
+Głównym celem analizy było znalezienie filtracji, która pozwoli na dektekcję zespołów QRS przy pomocy algorytmu Pan&Tompkins. Do obliczeń wykorzystano środowisko python oraz biblioteki: matplotlib oraz pandas do wizualizacji danych i obróbki, moduł signal z biblioteki scipy do filtracji elektorkardiogramów oraz bibliotekę neurokit2 która dostarcza między innymi algorytmy do analizy sygnału EKG, w tym Pan&Tompkins.
+
+W celu uzyskania filtra pasmowoprzepustowego zastosowano dwa współpracujące filtry Butterwortha 10 rzędu:
+górnoprzepustowy o częstotliwości odcięcia 2Hz
+dolnoprzepustowy o częstotliwości odcięcia 8Hz. 
+Zakres od 2 do 8Hz został wybrany doświadczalnie. Jest on stosunkowo wąski i zabiera znaczną część informacji zawartą w sygnale, jednak dobrze zachowuje charakter zespołów QRS, które mogą potem zostać z łatwością wykryte przez algorytmy detekcji.
